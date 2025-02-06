@@ -3,7 +3,7 @@ type UserInfomation = {
   password: string;
 };
 
-function validateLogin(values: UserInfomation) {
+function validateUser(values: UserInfomation) {
   const errors = {
     email: '',
     password: '',
@@ -19,4 +19,19 @@ function validateLogin(values: UserInfomation) {
   return errors;
 }
 
-export default validateLogin;
+function validateLogin(values: UserInfomation) {
+  return validateUser(values);
+}
+
+function validatesignup(values: UserInfomation & {passwordconfirm: string}) {
+  const errors = validateUser(values);
+  const signupErrors = {...errors, passwordconfirm: ''};
+
+  if (values.password !== values.passwordconfirm) {
+    signupErrors.passwordconfirm = 'Passwords must match';
+  }
+
+  return signupErrors;
+}
+
+export {validateLogin, validatesignup};

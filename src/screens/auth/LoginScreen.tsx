@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
 import InputField from '../../components/InputField';
 import CustomButton from '../../components/CustomButton';
 import useForm from '../../hooks/useForm';
-import validateLogin from '../../utils/validate';
+import {validateLogin} from '../../utils/validate';
 
 function LoginScreen() {
   const login = useForm({
@@ -19,6 +19,7 @@ function LoginScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <InputField
+          autoFocus
           placeholder="Email"
           error={login.errors.email}
           touched={login.touched.email}
