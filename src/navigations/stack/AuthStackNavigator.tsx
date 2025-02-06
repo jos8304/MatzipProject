@@ -3,7 +3,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import AuthHomeScreen from '../../screens/auth/AuthHomeScreen';
 import LoginScreen from '../../screens/auth/LoginScreen';
-import {authNaviagtions} from '../../constants';
+import {authNaviagtions} from '../../constants/navigations';
 import SignupScreen from '../../screens/auth/SignupScreen';
 
 export type AuthStackParamList = {
