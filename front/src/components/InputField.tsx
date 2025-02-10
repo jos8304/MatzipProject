@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {
   Dimensions,
   Pressable,
@@ -14,12 +14,14 @@ interface InputFieldProps extends TextInputProps {
   disabled?: boolean;
   error?: string;
   touched?: boolean;
+  icon?: ReactNode;
 }
 const deviceHeight = Dimensions.get('screen').height;
 function InputField({
   disabled = false,
   error,
   touched,
+  icon = null,
   ...props
 }: InputFieldProps) {
   const innerRef = React.useRef<TextInput | null>(null);
@@ -36,16 +38,18 @@ function InputField({
           disabled && styles.disabled,
           touched && Boolean(error) && styles.inputError,
         ]}>
-        <TextInput
-          ref={innerRef}
-          editable={!disabled}
-          placeholderTextColor={colors.GRAY_500}
-          style={[styles.input, disabled && styles.disabled]}
-          autoCapitalize="none"
-          spellCheck={false}
-          autoCorrect={false}
-          {...props}
-        />
+        <View style={Boolean(icon) && styles.innerContainer}>
+          <TextInput
+            ref={innerRef}
+            editable={!disabled}
+            placeholderTextColor={colors.GRAY_500}
+            style={[styles.input, disabled && styles.disabled]}
+            autoCapitalize="none"
+            spellCheck={false}
+            autoCorrect={false}
+            {...props}
+          />
+        </View>
         {touched && Boolean(error) && <Text style={styles.error}>{error}</Text>}
       </View>
     </Pressable>
@@ -75,6 +79,12 @@ const styles = StyleSheet.create({
     color: colors.RED_500,
     fontSize: 12,
     paddingTop: 5,
+  },
+  innerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    justifyContent: 'space-between',
   },
 });
 
